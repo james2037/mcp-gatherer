@@ -1,6 +1,6 @@
 # Magic: The Gathering MCP Tool Server
 
-A Model Context Protocl server for accessing Magic: The Gathering card data, rules, and set information. This server provides quick access to card details, rulings, comprehensive rules sections, and more.
+A Model Context Protocol server for accessing Magic: The Gathering card data, rules, and set information. This server provides quick access to card details, rulings, comprehensive rules sections, and more.
 
 ## Features
 
