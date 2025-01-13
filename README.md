@@ -1,90 +1,69 @@
-# MCP PHP Application
+# Magic: The Gathering MCP Tool Server
 
-The **MCP PHP Application** is a stub application designed to work with the [MCP PHP Server framework](https://github.com/james2037/mcp-php-server). It serves as a starting point for users implementing the [Model Context Protocol](https://modelcontextprotocol.io/) (MCP) in their projects.
+A Model Context Protocl server for accessing Magic: The Gathering card data, rules, and set information. This server provides quick access to card details, rulings, comprehensive rules sections, and more.
 
-## Prerequisites
+## Features
 
-Before using this application, ensure that you have the following installed:
+- Search for Magic cards by name, color, type, and other criteria
+- View detailed card information including rulings and foreign language versions
+- Access the Magic: The Gathering Comprehensive Rules
+- Browse set information and card listings
+- View card images (where available)
 
-1. **PHP**: Running `php --version` should report 8.1 or greater.
-2. **Composer**: The dependency manager for PHP. You can find it [here](https://getcomposer.org/).
+## Installation Requirements
 
-## Installation
+1. **PHP 8.1 or higher** 
+   - Check your version by running: `php --version`
+   - If needed, download from [php.net](https://www.php.net/downloads.php)
 
-To set up the application, follow these steps:
+2. **Composer** (PHP's dependency manager)
+   - Download from [getcomposer.org](https://getcomposer.org/)
+
+## Setup Instructions
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/james2037/mcp-php-application.git
+   git clone https://github.com/james2037/mcp-gatherer.git
    ```
 
 2. Navigate to the project directory:
    ```bash
-   cd mcp-php-application
+   cd mcp-gatherer
    ```
 
-3. Install the dependencies using Composer:
+3. Install dependencies:
    ```bash
    composer install
    ```
 
-## Creating a Tool
-
-To create a tool for the application, follow these steps:
-
-1. Create a new class in the `tools/` directory. For example:
-
-   ```php
-   <?php
-
-   namespace App\Tools;
-
-   use MCP\Server\Tool\Tool;
-   use MCP\Server\Tool\Attribute\Tool as ToolAttribute;
-   use MCP\Server\Tool\Attribute\Parameter as ParameterAttribute;
-
-   #[ToolAttribute('calculator', 'A calculator tool')]
-   class CalculatorTool extends Tool
-   {
-       protected function doExecute(
-           #[ParameterAttribute('operation', type: 'string', description: 'Operation to perform (add/subtract)')]
-           #[ParameterAttribute('a', type: 'number', description: 'First number')]
-           #[ParameterAttribute('b', type: 'number', description: 'Second number')]
-           array $arguments
-       ): array {
-           $result = match ($arguments['operation']) {
-               'add' => $arguments['a'] + $arguments['b'],
-               'subtract' => $arguments['a'] - $arguments['b'],
-               default => throw new \InvalidArgumentException('Invalid operation')
-           };
-
-           return $this->text((string)$result);
-       }
-   }
-   ```
-
-2. The `#[ToolAttribute]` annotation defines the name and description of the tool.
-3. Parameters for the tool are defined using the `#[ParameterAttribute]` annotation.
-4. Implement the `doExecute` method to define the tool's functionality.
-
 ## Running the Server
 
-To start the MCP PHP server, run the following command:
-   ```bash
-   php path/to/mcp_server.php
-   ```
-the `mcp_server.php` file is located in the root of this repository.
+Your MCP client, such as Claude Desktop, can start the server by invoking:
+```bash
+php path/to/mcp_server.php
+```
 
-The server will start and listen for requests based on the Model Context Protocol.
+The server will start and you can begin using the Magic: The Gathering tools through the MCP client. Be sure to specify the STDIO transport if necessary.
 
-## Features
+An example `claude_desktop_config.json` for a Windows user might look like:
 
-Currently, you can write tools. The server supports the STDIO transport only. New capabilities and transports coming soon.
-
-## Contributing
-
-Contributions to the MCP PHP Application are welcome! Feel free to submit issues or pull requests to improve functionality, documentation, or examples.
+```json
+{
+  "mcpServers": {
+    "mcp-gatherer": {
+      "command": "php",
+      "args": ["C:\\mcp-gatherer\\mcp_server.php"],
+      "disabled": false,
+      "alwaysAllow": []
+    }
+  }
+}
+```
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contributing
+
+If you'd like to contribute to the development of this tool, feel free to submit issues or pull requests. For major changes, please open an issue first to discuss what you would like to change.

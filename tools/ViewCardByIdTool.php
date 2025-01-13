@@ -7,7 +7,7 @@ use MCP\Server\Tool\Attribute\Tool as ToolAttribute;
 use MCP\Server\Tool\Attribute\Parameter as ParameterAttribute;
 
 #[ToolAttribute('view_mtg_card_by_id', 'View a Magic: The Gathering card by Multiverse ID. (Returns Image Data)')]
-class ViewCardByIdTool extends Tool 
+class ViewCardByIdTool extends Tool
 {
     protected function doExecute(
         #[ParameterAttribute('multiverseid', type: 'number', description: 'The Card to view.')]
@@ -32,7 +32,7 @@ class ViewCardByIdTool extends Tool
         ]);
 
         $imageData = @file_get_contents($url, false, $context);
-        
+
         if ($imageData === false) {
             $error = error_get_last();
             throw new \RuntimeException(sprintf(

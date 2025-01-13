@@ -3,15 +3,14 @@
 namespace App\Tools;
 
 use App\Util\CardJsonAdapter;
-
 use MCP\Server\Tool\Tool;
 use MCP\Server\Tool\Attribute\Tool as ToolAttribute;
 use MCP\Server\Tool\Attribute\Parameter as ParameterAttribute;
-
 use mtgsdk\Card;
 
 #[ToolAttribute('mtg_card_by_id', 'Get a Magic: The Gathering card by ID. Includes much more than search result, including rulings, legality, foreign names, other printings, flavor text, artist.')]
-class CardByIdTool extends Tool {
+class CardByIdTool extends Tool
+{
     protected function doExecute(
         #[ParameterAttribute('id', type: 'number', description: 'Required. Can be ID or Multiverse ID')]
         array $arguments

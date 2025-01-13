@@ -3,15 +3,14 @@
 namespace App\Tools;
 
 use App\Util\SmallCardJsonAdapter;
-
 use MCP\Server\Tool\Tool;
 use MCP\Server\Tool\Attribute\Tool as ToolAttribute;
 use MCP\Server\Tool\Attribute\Parameter;
-
 use mtgsdk\Card;
 
 #[ToolAttribute('mtg_search_cards', 'Search for Magic: The Gathering cards. Use | for OR search. Use , for AND search.')]
-class SearchCardsTool extends Tool {
+class SearchCardsTool extends Tool
+{
     protected function doExecute(
         #[Parameter('name', description: 'Card name to search for', required: false)]
         #[Parameter('layout', description: 'Card layout: normal, split, flip, double-faced, token, plane, scheme, phenomenon, leveler, vanguard, aftermath', required: false)]

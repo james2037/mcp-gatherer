@@ -8,7 +8,8 @@ use MCP\Server\Tool\Attribute\Tool as ToolAttribute;
 use MCP\Server\Tool\Attribute\Parameter as ParameterAttribute;
 
 #[ToolAttribute('mtg_rules_toc', 'Retrieve the table of contents for the Magic: The Gathering Comprehensive Rules')]
-class GetRulesContentsTool extends Tool {
+class GetRulesContentsTool extends Tool
+{
     use NeedsRulesTrait;
 
     protected function doExecute(
@@ -18,7 +19,9 @@ class GetRulesContentsTool extends Tool {
 
         // Seek past the line reading "Contents"
         while ($line = str_replace("\r\n", "\n", fgets($rules))) {
-            if ($line == "Contents\n") break;
+            if ($line == "Contents\n") {
+                break;
+            }
         }
 
         fgets($rules); // Seek past blank line.
@@ -29,7 +32,9 @@ class GetRulesContentsTool extends Tool {
         $line = null;
 
         while ($line = str_replace("\r\n", "\n", fgets($rules))) {
-            if ($line == $firstHeading) break;
+            if ($line == $firstHeading) {
+                break;
+            }
             $output .= $line;
         }
 
