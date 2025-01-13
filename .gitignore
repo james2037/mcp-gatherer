@@ -1,5 +1,11 @@
 # Composer dependencies
 /vendor/
 
+# Composer lockfile
+composer.lock
+
 #PHPUnit Cache
 .phpunit.cache
+
+#Stored rules text, etc.
+storage/*
